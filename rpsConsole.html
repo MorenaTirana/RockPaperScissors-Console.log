@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+	<script>
+		// variables
+		let computerSelection;
+		let playerSelection;
+		let computerScore = 0;
+		let playerScore = 0;
+		let draw = 0;
+		let round = 1;
+
+		// player choices
+		function playerInput() {
+			let playerChoice = prompt("Rock, Paper or Scissors?");
+			return playerChoice;
+			let playerSelection = playerChoice.toLowerCase();
+			return playerSelection;
+		}
+
+		// random computer choices
+		function getComputerChoice() 
+        {
+		    return ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
+		}
+
+		// single round 
+		function getWinner() {
+		
+			if (playerSelection == computerSelection) {
+				return 'draw';
+
+			} else if (playerSelection == "rock") {
+				if (computerSelection == "paper") {
+					return 'computer'; 
+				} else if (computerSelection == "scissors") {
+					return 'player'; 
+				}
+			} else if (playerSelection == "paper") {
+				if (computerSelection == "rock") {
+					return 'player'; 
+				} else if (computerSelection == "scissors") {
+					return 'computer';
+				}
+			} else if (playerSelection == "scissors") {
+				if (computerSelection == "rock") {
+					return 'computer'; 
+				} else if (computerSelection == "paper") {
+					return 'player'; 
+				}
+
+			} else {
+				return "You must have typed something wrong. Try again!";
+			}
+		}
+
+		// scores
+		function showWinner(winner) {
+			if (winner == 'player') {
+				playerScore++;
+				return 'You WON! ' + playerSelection.toUpperCase()  + ' beats ' + computerSelection.toUpperCase();
+             } else if(winner == 'computer')
+             {
+				computerScore++;
+				return 'You LOST! ' + computerSelection.toUpperCase() + ' beats ' + playerSelection.toUpperCase(); 
+			} else {
+				draw++;
+				return "That was a DRAW!";
+			}
+		}
+
+		// 5 rounds
+		function game() {
+			while (round <= 5) 
+            {
+				playerSelection = playerInput();
+				computerSelection = getComputerChoice();
+				let winner = getWinner();
+				console.log(winner);
+				let score = showWinner(winner);
+				console.log(score);
+				round++;
+			}
+			console.log("Final Scores: YOU: " + playerScore + " " + "COMPUTER: " + computerScore + " " + 'DRAWS: '+ draw);
+		}
+
+		game();
+
+
+	</script>
+
+
+</html>
